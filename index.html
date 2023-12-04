@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        main {
+            border-radius: 35px;
+            background: linear-gradient(145deg, #f0f0f0, #cacaca);
+            box-shadow:  14px 14px 28px #bebebe,
+             -14px -14px 28px #ffffff;
+             width: 400px;
+             height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: -20px;
+        }
+    </style>
+    <title>计算器</title>
+</head>
+<body>
+    <main>
+        <form name="Calculator">
+            <label><h3>计算器：</h3></label>
+            <label>输入第一个数字：<input type="number" id="num1"></label>
+            <label>输入第二个数字：<input type="number" id="num2"></label>
+            <label>请选择操作：</label>
+            <div>
+                <label><input type="radio" name="action" checked>+</label>
+                <label><input type="radio" name="action" >-</label>
+                <label><input type="radio" name="action" >×</label>
+                <label><input type="radio" name="action" >÷</label>
+                <input type="button" id="button" value="=" onclick="opreate();" 
+                style="
+                    width: 100px;
+                    margin-left:40px;
+                ">
+            </div>
+            
+            <label>结果是：<input type="text" id="result"  readonly style="
+                width:228px;
+                "/></label>
+        </form>
+    </main>
+
+    <script>
+        let action = document.getElementsByName("action");
+        let result = document.getElementById("result");
+        
+        function opreate() {
+            result.setAttribute("value", "");
+            let num1 = document.getElementById("num1").value;
+            if (num1 == "") {
+                alert("第一个操作数为空！");
+                return;
+            }else {
+                num1 = Number(num1);
+            }
+
+            let num2 = document.getElementById("num2").value;
+            if (num2 == "") {
+                alert("第二个操作数为空！");
+                return;
+            }else {
+                num2 = Number(num2);
+            }
+
+
+
+            if (action[0].checked) 
+                result.setAttribute("value", num1 + num2);
+            else if(action[1].checked)
+                result.setAttribute("value", num1 - num2);
+            else if(action[2].checked)
+                result.setAttribute("value", num1 * num2);
+            else if(action[3].checked){
+                if (num2 == 0) {
+                    alert("被除数不能为0！");
+                    return;
+                }
+                result.setAttribute("value", num1 / num2);
+            }
+        }
+
+    </script>
+</body>
+</html>
